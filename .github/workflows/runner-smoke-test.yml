@@ -1,0 +1,19 @@
+name: Spinnaker K3s Runner Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-runner:
+    runs-on: [self-hosted, linux, x64, spinnaker-k3s]
+
+    env:
+      KUBECONFIG: /home/github-runner/.kube/config
+
+    steps:
+      - name: Check runner
+        run: |
+          whoami
+          hostname
+          kubectl get nodes
+          kubectl get pods -n spinnaker
